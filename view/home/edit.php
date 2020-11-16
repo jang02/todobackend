@@ -19,7 +19,7 @@
                         echo 'selected="selected"';
                     }
                 }
-                ?>><?php echo $rider["riderName"] ?></option>;
+                ?>><?= $rider["riderName"] ?></option>;
 
                 <?php
             }
@@ -41,7 +41,7 @@
                     if ($entry["horseName"] == $horse["horseName"]) {
                         echo 'selected="selected"';
                     }
-                } ?>><?php echo($horse["horseName"]) ?></option>;
+                } ?>><?=($horse["horseName"]) ?></option>;
 
                 <?php
             }
@@ -65,7 +65,7 @@
                } else {
                    echo $entry["endTime"];
                } ?>">
-        <input class="hidden" name="entryid" value="<?php echo $entry["id"]; ?>">
+        <input class="hidden" name="entryid" value="<?= $entry["id"]; ?>">
     </div>
     <div class="form-group">
         <label for="date">Datum</label>

@@ -13,4 +13,4 @@
 
     ?>
 </table>
-<a href="<?= URL ?>home/destroy/<?php echo $data["id"] ?>" class="btn btn-primary">Verwijderen</a>
+<a href="<?= URL ?>home/destroy/<?= $data["id"] ?>" class="btn btn-primary">Verwijderen</a>

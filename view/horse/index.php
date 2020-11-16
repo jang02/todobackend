@@ -10,15 +10,19 @@
     </tr>
     <?php
     foreach ($data["horse"] as $horse) {
-
-        echo '<tr><td>'.$horse["horseID"].'</td><td>'.$horse["type"].'</td><td>'.$horse["horseName"].'</td>
-<td>'.$horse["ras"].'</td><td>'.$horse["schofthoogte"].'</td><td><a href="edit/'.$horse["horseID"].'"><i class="fas fa-pen"></i></a> <a href="delete/'.$horse["horseID"].'"><i class="fas fa-trash"></i></a></td></tr>';
-
-
-
-
-
-    }
-
     ?>
-</table>
+    <tr>
+        <td><?=$horse["horseID"] ?></td>
+        <td><?=$horse["type"] ?></td>
+        <td><?=$horse["horseName"] ?></td>
+        <td><?=$horse["ras"] ?></td>
+        <td><?=$horse["schofthoogte"] ?></td>
+        <td>
+            <a href="edit/<?=$horse["horseID"] ?>"><i class="fas fa-pen"></i></a>
+            <a href="delete/<?=$horse["horseID"] ?>"><i class="fas fa-trash"></i></a>
+        </td>
+    </tr>
+
+<?php
+}
+?>

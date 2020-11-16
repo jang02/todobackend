@@ -1,4 +1,4 @@
-<h1>Paard aanmaken</h1>
+<h1>Paard aanpassen</h1>
 
 <form action="<?= URL ?>horse/editStore" method="post">
     <div class="form-group">
@@ -27,6 +27,6 @@
         <label for="schofthoogte">Schofthoogte</label>
         <input name="schofthoogte" class="form-control" id="schofthoogte" value="<?php if (isset($_SESSION["oldData"]["schofthoogte"])){echo $_SESSION["oldData"]["schofthoogte"];} else {echo $data["schofthoogte"];} ?>">
     </div>
-    <input class="hidden" name="id" value="<?php echo $data["horseID"]; ?>">
+    <input class="hidden" name="id" value="<?= $data["horseID"]; ?>">
     <input class="btn btn-primary" type="submit">
 </form>

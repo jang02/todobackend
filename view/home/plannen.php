@@ -12,7 +12,7 @@
                     if ($_SESSION["oldData"]["rider"] == $rider["riderName"]) {
                         echo 'selected="selected"';
                     }
-                } ?>><?php echo $rider["riderName"] ?></option>;
+                } ?>><?= $rider["riderName"] ?></option>;
 
                 <?php
             }
@@ -30,7 +30,7 @@
                     if ($_SESSION["oldData"]["horse"] == $horse["horseName"]) {
                         echo 'selected="selected"';
                     }
-                } ?>><?php echo($horse["horseName"]) ?></option>;
+                } ?>><?=($horse["horseName"]) ?></option>;
 
                 <?php
             }

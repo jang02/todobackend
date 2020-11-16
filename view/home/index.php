@@ -47,13 +47,25 @@
     <?php
     if (isset($data["planned"][0]["date"])) {
         foreach ($data["planned"] as $planned) {
-            echo '<tr><td>' . $planned["riderName"] . '</td><td>' . $planned["horseName"] . '</td><td>' . $planned["startTime"] . '</td><td>' . $planned["endTime"] . '</td>
-<td>' . $planned["id"] . '</td><td>' . $planned["date"] . '<a href="edit/' . $planned["id"] . '"><i class="fas fa-pen"></i></a> <a href="delete/' . $planned["id"] . '"><i class="fas fa-trash"></i></a></td></tr>';
+            ?>
+            <tr>
+                <td><?= $planned["riderName"] ?></td>
+                <td><?= $planned["horseName"] ?></td>
+                <td><?= $planned["startTime"] ?></td>
+                <td><?= $planned["endTime"] ?></td>
+                <td><?= $planned["id"] ?></td>
+                <td><?= $planned["date"] ?></td>
+                <td>
+                    <a href="edit/<?= $planned["id"] ?>"><i class="fas fa-pen"></i></a>
+                    <a href="delete/<?= $planned["id"] ?>"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+
+            <?php
         }
-    } else {
+    } else{
         echo "No date found in database";
     }
-
-
     ?>
 </table>
+
