@@ -10,8 +10,8 @@
     <?php
     foreach ($data["rider"] as $rider) {
 
-        echo '<tr><td>'.$rider["RiderID"].'</td><td>'.$rider["RiderName"].'</td>
-<td>'.$rider["adress"].'</td><td>'.$rider["phonenumber"].'</td><td><a href="edit/'.$rider["RiderID"].'"><i class="fas fa-pen"></i></a> <a href="delete/'.$rider["RiderID"].'"><i class="fas fa-trash"></i></a></td></tr>';
+        echo '<tr><td>'.$rider["riderID"].'</td><td>'.$rider["riderName"].'</td>
+<td>'.$rider["adress"].'</td><td>'.$rider["phoneNumber"].'</td><td><a href="edit/'.$rider["riderID"].'"><i class="fas fa-pen"></i></a> <a href="delete/'.$rider["riderID"].'"><i class="fas fa-trash"></i></a></td></tr>';
 
 
 

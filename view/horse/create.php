@@ -10,15 +10,15 @@
     </div>
     <div class="form-group">
         <label for="name">Naam</label>
-        <input name="name" class="form-control" id="name" value="<?php if (isset($_SESSION["olddata"]["name"])){echo $_SESSION["olddata"]["name"];} ?>">
+        <input name="name" class="form-control" id="name" value="<?php if (isset($_SESSION["oldData"]["name"])){echo $_SESSION["oldData"]["name"];} ?>">
     </div>
     <div class="form-group">
         <label for="ras">Ras</label>
-        <input name="ras" class="form-control" id="ras" value="<?php if (isset($_SESSION["olddata"]["ras"])){echo $_SESSION["olddata"]["ras"];} ?>">
+        <input name="ras" class="form-control" id="ras" value="<?php if (isset($_SESSION["oldData"]["ras"])){echo $_SESSION["oldData"]["ras"];} ?>">
     </div>
     <div class="form-group">
         <label for="schofthoogte">Schofthoogte</label>
-        <input  name="schofthoogte" class="form-control" id="schofthoogte" value="<?php if (isset($_SESSION["olddata"]["schofthoogte"])){echo $_SESSION["olddata"]["schofthoogte"];} ?>">
+        <input  name="schofthoogte" class="form-control" id="schofthoogte" value="<?php if (isset($_SESSION["oldData"]["schofthoogte"])){echo $_SESSION["oldData"]["schofthoogte"];} ?>">
     </div>
     <input class="btn btn-primary" type="submit">
 </form>

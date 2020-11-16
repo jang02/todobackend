@@ -8,7 +8,7 @@
         <th>Planning ID</th>
     </tr>
     <?php
-    echo '<tr><td>' . $data["RiderName"] . '</td><td>' . $data["HorseName"] . '</td><td>' . $data["start_time"] . '</td><td>' . $data["end_time"] . '</td>
+    echo '<tr><td>' . $data["riderName"] . '</td><td>' . $data["horseName"] . '</td><td>' . $data["startTime"] . '</td><td>' . $data["endTime"] . '</td>
 <td>' . $data["id"] . '</td></tr>';
 
     ?>

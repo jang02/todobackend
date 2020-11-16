@@ -18,23 +18,23 @@ function availability()
 {
     $horses = getAllHorses();
     $date = null;
-    $horsecheck = array();
+    $horseCheck = array();
     if (isset($_POST["date"])) {
         $date = date($_POST["date"]);
     } else {
         $date = date('Y/m/d');
     }
     foreach ($horses as $horse) {
-        if (horsePlanned($horse["HorseID"], $date)) {
+        if (horsePlanned($horse["horseID"], $date)) {
             echo "true";
-            array_push($horsecheck, "ja");
+            array_push($horseCheck, "ja");
         } else {
             echo "false";
-            array_push($horsecheck, "nee");
+            array_push($horseCheck, "nee");
         }
     }
     render("horse/availability", array(
-        'boolean' => $horsecheck,
+        'boolean' => $horseCheck,
         'horse' => $horses
     ));
 
@@ -56,10 +56,10 @@ function delete($id)
 
 function store()
 {
-    $type = ValidateData($_POST["type"]);
-    $name = ValidateData($_POST["name"]);
-    $ras = ValidateData($_POST["ras"]);
-    $schofthoogte = ValidateData($_POST["schofthoogte"]);
+    $type = validateData($_POST["type"]);
+    $name = validateData($_POST["name"]);
+    $ras = validateData($_POST["ras"]);
+    $schofthoogte = validateData($_POST["schofthoogte"]);
 
     if ($type == "" || $name == "" || $ras == "" || tofloat($schofthoogte) <= 0 || tofloat($schofthoogte) > 3) {
         if ($name == "") {
@@ -73,7 +73,7 @@ function store()
         } else if (tofloat($schofthoogte) <= 0 || tofloat($schofthoogte) > 3) {
             $_SESSION["error"][] = "Schofthoogte moet groter dan 0 en kleiner of gelijk aan 3 zijn";
         }
-        $_SESSION["olddata"] = $_POST;
+        $_SESSION["oldData"] = $_POST;
         header("Location: create");
     } else {
         createHorse($type, $name, $ras, tofloat($schofthoogte));
@@ -88,14 +88,14 @@ function destroy($id)
     deleteHorse($id);
 }
 
-function editstore()
+function editStore()
 {
     $id = $type = $name = $ras = $schofthoogte = "";
-    $id = ValidateData($_POST["id"]);
-    $type = ValidateData($_POST["type"]);
-    $name = ValidateData($_POST["name"]);
-    $ras = ValidateData($_POST["ras"]);
-    $schofthoogte = ValidateData($_POST["schofthoogte"]);
+    $id = validateData($_POST["id"]);
+    $type = validateData($_POST["type"]);
+    $name = validateData($_POST["name"]);
+    $ras = validateData($_POST["ras"]);
+    $schofthoogte = validateData($_POST["schofthoogte"]);
 
     if ($type == "" || $name == "" || $ras == "" || tofloat($schofthoogte) <= 0 || tofloat($schofthoogte) > 3) {
         if ($name == "") {
@@ -109,7 +109,7 @@ function editstore()
         } else if (tofloat($schofthoogte) <= 0 || tofloat($schofthoogte) > 3) {
             $_SESSION["error"][] = "Schofthoogte moet groter dan 0 en kleiner of gelijk aan 3 zijn";
         }
-        $_SESSION["olddata"] = $_POST;
+        $_SESSION["oldData"] = $_POST;
         header("Location: edit/$id");
     } else {
         updateHorse($id, $type, $name, $ras, tofloat($schofthoogte));

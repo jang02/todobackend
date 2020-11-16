@@ -39,9 +39,9 @@ function horsePlanned($id, $date)
         $sql = "SELECT TIME_FORMAT(start_time, '%H:%i') start_time, TIME_FORMAT(end_time, '%H:%i') end_time, Horse_id, Date 
 FROM planning 
 
-  WHERE Horse_id=:horseid AND Date=:date";
+  WHERE Horse_id=:horseID AND Date=:date";
         $query = $db->prepare($sql);
-        $query->bindParam(":horseid", $id);
+        $query->bindParam(":horseID", $id);
         $query->bindParam(":date", $date);
         $query->execute();
 
@@ -74,7 +74,7 @@ function getHorse($id)
 
 }
 
-function ValidateData($data)
+function validateData($data)
 {
     $data = trim($data);
     $data = stripslashes($data);
@@ -87,7 +87,7 @@ function createHorse($type, $name, $ras, $schofthoogte)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("INSERT INTO `horses` (HorseID, type, HorseName, ras, schofthoogte) VALUES (NULL, :type, :name, :ras, :schofthoogte)");
+        $stmt = $conn->prepare("INSERT INTO `horses` (horseID, type, horseName, ras, schofthoogte) VALUES (NULL, :type, :name, :ras, :schofthoogte)");
         $stmt->bindParam(":type", $type);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":ras", $ras);
@@ -106,11 +106,11 @@ function createHorse($type, $name, $ras, $schofthoogte)
 function deleteHorse($id)
 {
     $data = getHorse($id);
-    $_SESSION["success"][] = "Successvol een $data[type] met de naam $data[HorseName] verwijderd!";
+    $_SESSION["success"][] = "Successvol een $data[type] met de naam $data[horseName] verwijderd!";
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("DELETE FROM `horses` WHERE HorseID = :id");
+        $stmt = $conn->prepare("DELETE FROM `horses` WHERE horseID = :id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
 
@@ -127,7 +127,7 @@ function updateHorse($id, $type, $name, $ras, $schofthoogte)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("UPDATE `horses` SET `type`=:type, `HorseName`=:name, `ras`=:ras, `schofthoogte`=:schofthoogte WHERE `HorseID`=:id");
+        $stmt = $conn->prepare("UPDATE `horses` SET `type`=:type, `horseName`=:name, `ras`=:ras, `schofthoogte`=:schofthoogte WHERE `horseID`=:id");
         $stmt->bindParam(":type", $type);
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":ras", $ras);

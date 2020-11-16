@@ -32,25 +32,25 @@ function store()
 {
     $name = ValidateData($_POST["name"]);
     $adress = ValidateData($_POST["adress"]);
-    $phonenumber = ValidateData($_POST["phonenumber"]);
+    $phoneNumber = ValidateData($_POST["phoneNumber"]);
 
 
-    if ($name == "" || $adress == "" || !is_numeric($phonenumber)) {
+    if ($name == "" || $adress == "" || !is_numeric($phoneNumber)) {
         if ($name == "") {
             $_SESSION["error"][] = "Vul een naam in";
         }
         if ($adress == "") {
             $_SESSION["error"][] = "Vul een adres in";
         }
-        if ($phonenumber == "") {
+        if ($phoneNumber == "") {
             $_SESSION["error"][] = "Vul een telefoon nummer in";
-        } else if (!is_numeric($phonenumber)) {
+        } else if (!is_numeric($phoneNumber)) {
             $_SESSION["error"][] = "u kunt alleen nummers invoeren bij telefoon nummer";
         }
-        $_SESSION["olddata"] = $_POST;
+        $_SESSION["oldData"] = $_POST;
         header("Location: create");
     } else {
-        createRider($name, $adress, $phonenumber);
+        createRider($name, $adress, $phoneNumber);
         $_SESSION["success"][] = "Successvol een rijder met de naam $name Toegevoegd!";
         header("Location: index");
     }
@@ -62,29 +62,29 @@ function destroy($id)
     deleteRider($id);
 }
 
-function editstore()
+function editStore()
 {
     $id = ValidateData($_POST["id"]);
     $name = ValidateData($_POST["name"]);
     $adress = ValidateData($_POST["adress"]);
-    $phonenumber = ValidateData($_POST["phonenumber"]);
+    $phoneNumber = ValidateData($_POST["phoneNumber"]);
 
-    if ($name == "" || $adress == "" || !is_numeric($phonenumber)) {
+    if ($name == "" || $adress == "" || !is_numeric($phoneNumber)) {
         if ($name == "") {
             $_SESSION["error"][] = "Vul een naam in";
         }
         if ($adress == "") {
             $_SESSION["error"][] = "Vul een adres in";
         }
-        if ($phonenumber == "") {
+        if ($phoneNumber == "") {
             $_SESSION["error"][] = "Vul een telefoon nummer in";
-        } else if (!is_numeric($phonenumber)) {
+        } else if (!is_numeric($phoneNumber)) {
             $_SESSION["error"][] = "u kunt alleen nummers invoeren bij telefoon nummer";
         }
-        $_SESSION["olddata"] = $_POST;
+        $_SESSION["oldData"] = $_POST;
         header("Location: edit/$id");
     } else {
-        updateRider($id, $name, $adress, $phonenumber);
+        updateRider($id, $name, $adress, $phoneNumber);
         $_SESSION["success"][] = "Successvol het ID $id aangepast!";
         header("Location: index");
     }

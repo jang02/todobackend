@@ -1,6 +1,6 @@
 <?php
 
-function getALlRiders()
+function getAllRiders()
 {
     $db = openDatabaseConnection();
 
@@ -18,7 +18,7 @@ function getRider($id)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("SELECT * FROM `riders` WHERE RiderID = :id");
+        $stmt = $conn->prepare("SELECT * FROM `riders` WHERE riderID = :id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
 
@@ -34,7 +34,7 @@ function getRider($id)
 
 }
 
-function ValidateData($data)
+function validateData($data)
 {
     $data = trim($data);
     $data = stripslashes($data);
@@ -42,15 +42,15 @@ function ValidateData($data)
     return $data;
 }
 
-function createRider($name, $adress, $phonenumber)
+function createRider($name, $adress, $phoneNumber)
 {
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("INSERT INTO `riders` (RiderID, RiderName, adress, phonenumber) VALUES (NULL, :name, :adress, :phonenumber)");
+        $stmt = $conn->prepare("INSERT INTO `riders` (riderID, riderName, adress, phoneNumber) VALUES (NULL, :name, :adress, :phoneNumber)");
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":adress", $adress);
-        $stmt->bindParam(":phonenumber", $phonenumber);
+        $stmt->bindParam(":phoneNumber", $phoneNumber);
         $stmt->execute();
 
     } catch (PDOException $e) {
@@ -65,11 +65,11 @@ function createRider($name, $adress, $phonenumber)
 function deleteRider($id)
 {
     $data = getRider($id);
-    $_SESSION["success"][] = "$data[RiderName] met ID $id was successvol verwijdered uit de database!";
+    $_SESSION["success"][] = "$data[riderName] met ID $id was successvol verwijdered uit de database!";
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("DELETE FROM `riders` WHERE RiderID = :id");
+        $stmt = $conn->prepare("DELETE FROM `riders` WHERE riderID = :id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
 
@@ -81,15 +81,15 @@ function deleteRider($id)
     header("Location: ../index");
 }
 
-function updateRider($id, $name, $adress, $phonenumber)
+function updateRider($id, $name, $adress, $phoneNumber)
 {
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("UPDATE `riders` SET `RiderName`=:name, `adress`=:adress, `phonenumber`=:phonenumber WHERE `RiderID`=:id");
+        $stmt = $conn->prepare("UPDATE `riders` SET `riderName`=:name, `adress`=:adress, `phoneNumber`=:phoneNumber WHERE `riderID`=:id");
         $stmt->bindParam(":name", $name);
         $stmt->bindParam(":adress", $adress);
-        $stmt->bindParam(":phonenumber", $phonenumber);
+        $stmt->bindParam(":phoneNumber", $phoneNumber);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
 

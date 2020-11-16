@@ -1,6 +1,6 @@
 <h1>Paard aanmaken</h1>
 
-<form action="<?= URL ?>horse/editstore" method="post">
+<form action="<?= URL ?>horse/editStore" method="post">
     <div class="form-group">
         <label for="type">Type</label>
         <select name="type" class="form-control" id="type" value="Pony">
@@ -17,16 +17,16 @@
     </div>
     <div class="form-group">
         <label for="name">Naam</label>
-        <input name="name" class="form-control" id="name" value="<?php if (isset($_SESSION["olddata"]["name"])){echo $_SESSION["olddata"]["name"];} else {echo $data["HorseName"];} ?>">
+        <input name="name" class="form-control" id="name" value="<?php if (isset($_SESSION["oldData"]["name"])){echo $_SESSION["oldData"]["name"];} else {echo $data["horseName"];} ?>">
     </div>
     <div class="form-group">
         <label for="ras">Ras</label>
-        <input name="ras" class="form-control" id="ras" value="<?php  if (isset($_SESSION["olddata"]["ras"])){echo $_SESSION["olddata"]["ras"];} else {echo $data["ras"];} ?>">
+        <input name="ras" class="form-control" id="ras" value="<?php  if (isset($_SESSION["oldData"]["ras"])){echo $_SESSION["oldData"]["ras"];} else {echo $data["ras"];} ?>">
     </div>
     <div class="form-group">
         <label for="schofthoogte">Schofthoogte</label>
-        <input name="schofthoogte" class="form-control" id="schofthoogte" value="<?php if (isset($_SESSION["olddata"]["schofthoogte"])){echo $_SESSION["olddata"]["schofthoogte"];} else {echo $data["schofthoogte"];} ?>">
+        <input name="schofthoogte" class="form-control" id="schofthoogte" value="<?php if (isset($_SESSION["oldData"]["schofthoogte"])){echo $_SESSION["oldData"]["schofthoogte"];} else {echo $data["schofthoogte"];} ?>">
     </div>
-    <input class="hidden" name="id" value="<?php echo $data["HorseID"]; ?>">
+    <input class="hidden" name="id" value="<?php echo $data["horseID"]; ?>">
     <input class="btn btn-primary" type="submit">
 </form>

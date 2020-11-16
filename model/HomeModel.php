@@ -5,12 +5,12 @@ function getAllPlanned($date)
     try {
         $db = openDatabaseConnection();
 
-        $sql = "SELECT id, TIME_FORMAT(start_time, '%H:%i') start_time, TIME_FORMAT(end_time, '%H:%i') end_time, RiderName, HorseName, Date 
+        $sql = "SELECT id, TIME_FORMAT(startTime, '%H:%i') startTime, TIME_FORMAT(endTime, '%H:%i') endTime, riderName, horseName, date 
 FROM planning 
-  INNER JOIN riders on RiderID = Rider_id 
-  INNER JOIN horses on HorseID = Horse_id 
-WHERE Date=:date
-ORDER BY start_time ASC";
+  INNER JOIN riders on riderID = rider_id 
+  INNER JOIN horses on horseID = horse_id 
+WHERE date=:date
+ORDER BY startTime ASC";
         $query = $db->prepare($sql);
         $query->bindParam(":date", $date);
         $query->execute();
@@ -36,7 +36,7 @@ function getAllHorses()
     return $query->fetchAll();
 }
 
-function getALlRiders()
+function getAllRiders()
 {
     $db = openDatabaseConnection();
 
@@ -49,12 +49,12 @@ function getALlRiders()
     return $query->fetchAll();
 }
 
-function getIDrider($name)
+function getIDRider($name)
 {
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("SELECT `RiderID` FROM `riders` WHERE RiderName = :name");
+        $stmt = $conn->prepare("SELECT `riderID` FROM `riders` WHERE riderName = :name");
         $stmt->bindParam(":name", $name);
         $stmt->execute();
 
@@ -68,12 +68,12 @@ function getIDrider($name)
     return $stmt->fetch();
 }
 
-function getIDhorse($name)
+function getIDHorse($name)
 {
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("SELECT `HorseID` FROM `horses` WHERE HorseName = :name");
+        $stmt = $conn->prepare("SELECT `horseID` FROM `horses` WHERE horseName = :name");
         $stmt->bindParam(":name", $name);
         $stmt->execute();
 
@@ -93,7 +93,7 @@ function getTimes($id, $option)
         try {
             $conn = openDatabaseConnection();
 
-            $stmt = $conn->prepare("SELECT `start_time`,`end_time` FROM `planning` WHERE Rider_id = :id");
+            $stmt = $conn->prepare("SELECT `startTime`,`endTime` FROM `planning` WHERE rider_id = :id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
 
@@ -109,7 +109,7 @@ function getTimes($id, $option)
         try {
             $conn = openDatabaseConnection();
 
-            $stmt = $conn->prepare("SELECT `start_time`,`end_time` FROM `planning` WHERE Horse_id = :id");
+            $stmt = $conn->prepare("SELECT `startTime`,`endTime` FROM `planning` WHERE horse_id = :id");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
 
@@ -124,15 +124,15 @@ function getTimes($id, $option)
     }
 }
 
-function getTimesupdate($id, $entryid, $option)
+function getTimesUpdate($id, $entryID, $option)
 {
     if ($option === "rider") {
         try {
             $conn = openDatabaseConnection();
 
-            $stmt = $conn->prepare("SELECT `start_time`,`end_time` FROM `planning` WHERE Rider_id = :id AND WHERE NOT id = :entryid");
+            $stmt = $conn->prepare("SELECT `startTime`,`endTime` FROM `planning` WHERE rider_id = :id AND WHERE NOT id = :entryID");
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":entryid", $entryid);
+            $stmt->bindParam(":entryID", $entryID);
             $stmt->execute();
 
         } catch (PDOException $e) {
@@ -147,9 +147,9 @@ function getTimesupdate($id, $entryid, $option)
         try {
             $conn = openDatabaseConnection();
 
-            $stmt = $conn->prepare("SELECT `start_time`,`end_time` FROM `planning` WHERE Horse_id = :id AND WHERE NOT id = :entryid");
+            $stmt = $conn->prepare("SELECT `startTime`,`endTime` FROM `planning` WHERE horse_id = :id AND WHERE NOT id = :entryID");
             $stmt->bindParam(":id", $id);
-            $stmt->bindParam(":entryid", $entryid);
+            $stmt->bindParam(":entryID", $entryID);
             $stmt->execute();
 
         } catch (PDOException $e) {
@@ -189,10 +189,10 @@ function entry($id)
 {
     $conn = openDatabaseConnection();
 
-    $stmt = $conn->prepare("SELECT id, TIME_FORMAT(start_time, '%H:%i') start_time, TIME_FORMAT(end_time, '%H:%i') end_time, RiderName, HorseName, Date 
+    $stmt = $conn->prepare("SELECT id, TIME_FORMAT(startTime, '%H:%i') startTime, TIME_FORMAT(endTime, '%H:%i') endTime, riderName, horseName, date 
 FROM planning 
-  INNER JOIN riders on RiderID = Rider_id 
-  INNER JOIN horses on HorseID = Horse_id 
+  INNER JOIN riders on riderID = rider_id 
+  INNER JOIN horses on horseID = horse_id 
 WHERE id = :id");
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -205,7 +205,7 @@ function createEntry($rider, $horse, $start, $end, $date)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("INSERT INTO `planning` (id, start_time, end_time, Horse_id, Rider_id, Date) VALUES (NULL, :start, :end, :horse, :rider, :date)");
+        $stmt = $conn->prepare("INSERT INTO `planning` (id, startTime, endTime, horse_id, rider_id, Date) VALUES (NULL, :start, :end, :horse, :rider, :date)");
         $stmt->bindParam(":start", $start);
         $stmt->bindParam(":end", $end);
         $stmt->bindParam(":horse", $horse);
@@ -226,11 +226,11 @@ function updateEntry($rider, $horse, $start, $end, $id, $date)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("UPDATE planning SET `start_time`=:start, `end_time`=:end, `Horse_id`=:horseid, `Rider_id`=:riderid, `Date`=:date WHERE `id`=:id");
+        $stmt = $conn->prepare("UPDATE planning SET `startTime`=:start, `endTime`=:end, `horse_id`=:horseID, `rider_id`=:riderID, `date`=:date WHERE `id`=:id");
         $stmt->bindParam(":start", $start);
         $stmt->bindParam(":end", $end);
-        $stmt->bindParam(":horseid", $horse);
-        $stmt->bindParam(":riderid", $rider);
+        $stmt->bindParam(":horseID", $horse);
+        $stmt->bindParam(":riderID", $rider);
         $stmt->bindParam(":date", $date);
         $stmt->bindParam(":id", $id);
         $stmt->execute();

@@ -8,28 +8,28 @@
 </form>
 <div id="dateWrapper">
     <form action="<?= URL ?>home/index" method="post">
-        <input name="date" class="hidden" value="<?php $date = $data["planned"][0]["Date"];
+        <input name="date" class="hidden" value="<?php $date = $data["planned"][0]["date"];
         $date = strtotime($date);
         $date = strtotime("-1 day", $date);
         echo date('Y-m-d', $date); ?>">
         <?php
-        if (isset($data["planned"][0]["Date"])) {
+        if (isset($data["planned"][0]["date"])) {
             echo '<input type="submit" class="btn btn-primary" value="Vorige">';
         }
         ?>
     </form>
     <?php
-    if (isset($data["planned"][0]["Date"])) {
-        echo '<p>' . $data["planned"][0]["Date"] . '</p>';
+    if (isset($data["planned"][0]["date"])) {
+        echo '<p>' . $data["planned"][0]["date"] . '</p>';
     }
     ?>
     <form action="<?= URL ?>home/index" method="post">
-        <input name="date" class="hidden" value="<?php $date = $data["planned"][0]["Date"];
+        <input name="date" class="hidden" value="<?php $date = $data["planned"][0]["date"];
         $date = strtotime($date);
         $date = strtotime("+1 day", $date);
         echo date('Y-m-d', $date); ?>">
         <?php
-        if (isset($data["planned"][0]["Date"])) {
+        if (isset($data["planned"][0]["date"])) {
             echo '<input type="submit" class="btn btn-primary" value="Volgende">';
         }
         ?>
@@ -42,12 +42,13 @@
         <th scope="col">Start tijd</th>
         <th scope="col">Eind tijd</th>
         <th scope="col">Planning ID</th>
+        <th scope="col">Datum</th>
     </tr>
     <?php
-    if (isset($data["planned"][0]["Date"])) {
+    if (isset($data["planned"][0]["date"])) {
         foreach ($data["planned"] as $planned) {
-            echo '<tr><td>' . $planned["RiderName"] . '</td><td>' . $planned["HorseName"] . '</td><td>' . $planned["start_time"] . '</td><td>' . $planned["end_time"] . '</td>
-<td>' . $planned["id"] . '</td><td>' . $planned["Date"] . '<a href="edit/' . $planned["id"] . '"><i class="fas fa-pen"></i></a> <a href="delete/' . $planned["id"] . '"><i class="fas fa-trash"></i></a></td></tr>';
+            echo '<tr><td>' . $planned["riderName"] . '</td><td>' . $planned["horseName"] . '</td><td>' . $planned["startTime"] . '</td><td>' . $planned["endTime"] . '</td>
+<td>' . $planned["id"] . '</td><td>' . $planned["date"] . '<a href="edit/' . $planned["id"] . '"><i class="fas fa-pen"></i></a> <a href="delete/' . $planned["id"] . '"><i class="fas fa-trash"></i></a></td></tr>';
         }
     } else {
         echo "No date found in database";

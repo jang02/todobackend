@@ -46,36 +46,36 @@ function delete($id)
 
 function store()
 {
-    $_SESSION["olddata"] = $_POST;
-    $starttime = $_POST["start"];
-    $endtime = $_POST["end"];
-    $idrider = getIDrider($_POST["rider"]);
-    $idhorse = getIDhorse($_POST["horse"]);
+    $_SESSION["oldData"] = $_POST;
+    $startTime = $_POST["startTime"];
+    $endTime = $_POST["endTime"];
+    $idRider = getIDRider($_POST["rider"]);
+    $idHorse = getIDHorse($_POST["horse"]);
     $date = $_POST["date"];
     $checker = [];
 
-    if (!empty($starttime) && !empty($endtime)) {
-        if (strtotime($starttime) > strtotime($endtime)) {
+    if (!empty($startTime) && !empty($endTime)) {
+        if (strtotime($startTime) > strtotime($endTime)) {
             $_SESSION["error"][] = "End time can't be smaller than start time";
             header("Location: plannen");
         } else {
             // start is eerder dan eindtijd
 
-            if (strtotime($starttime) < strtotime("09:00:00") || strtotime($endtime) > strtotime("15:00:00")) {
+            if (strtotime($startTime) < strtotime("09:00:00") || strtotime($endTime) > strtotime("15:00:00")) {
                 $_SESSION["error"][] = "Time must be between 9am and 3pm";
                 header("Location: plannen");
             } else {
 
-                foreach (getTimes($idrider["RiderID"], "rider") as $timesrider) {
-                    if (compareTime($starttime, $timesrider["start_time"], $timesrider["end_time"], $endtime, "start") == false && compareTime($starttime, $timesrider["start_time"], $timesrider["end_time"], $endtime, "end") == false) {
+                foreach (getTimes($idRider["RiderID"], "rider") as $timesRider) {
+                    if (compareTime($startTime, $timesRider["start_time"], $timesRider["end_time"], $endTime, "start") == false && compareTime($startTime, $timesRider["start_time"], $timesRider["end_time"], $endTime, "end") == false) {
                         array_push($checker, true);
                     } else {
                         $_SESSION["error"][] = "Rider is unavailable during your selected times";
                         array_push($checker, false);
                     }
                 }
-                foreach (getTimes($idhorse["HorseID"], "horse") as $timeshorse) {
-                    if (compareTime($starttime, $timeshorse["start_time"], $timeshorse["end_time"], $endtime, "start") == false && compareTime($starttime, $timeshorse["start_time"], $timeshorse["end_time"], $endtime, "end") == false) {
+                foreach (getTimes($idHorse["HorseID"], "horse") as $timesHorse) {
+                    if (compareTime($startTime, $timesHorse["start_time"], $timesHorse["end_time"], $endTime, "start") == false && compareTime($startTime, $timesHorse["start_time"], $timesHorse["end_time"], $endTime, "end") == false) {
                         array_push($checker, true);
                     } else {
                         $_SESSION["error"][] = "Horse is unavailable during your selected times";
@@ -85,7 +85,7 @@ function store()
                 if (in_array(false, $checker)) {
                     header("Location: plannen");
                 } else {
-                    createEntry($idrider["RiderID"], $idhorse["HorseID"], $starttime, $endtime, $date);
+                    createEntry($idRider["riderID"], $idHorse["horseID"], $startTime, $endTime, $date);
                     header("Location: index");
                 }
             }
@@ -98,41 +98,41 @@ function store()
     }
 }
 
-function updatestore()
+function updateStore()
 {
-    $_SESSION["olddata"] = $_POST;
-    $starttime = $_POST["start"];
-    $endtime = $_POST["end"];
-    $idrider = getIDrider($_POST["rider"]);
-    $idhorse = getIDhorse($_POST["horse"]);
-    $entryid = $_POST["entryid"];
+    $_SESSION["oldData"] = $_POST;
+    $startTime = $_POST["startTime"];
+    $endTime = $_POST["endTime"];
+    $idRider = getidRider($_POST["rider"]);
+    $idHorse = getidHorse($_POST["horse"]);
+    $entryID = $_POST["entryID"];
     $date = $_POST["date"];
     $checker = [];
 
-    if (!empty($starttime) && !empty($endtime)) {
-        if (strtotime($starttime) > strtotime($endtime)) {
+    if (!empty($startTime) && !empty($endTime)) {
+        if (strtotime($startTime) > strtotime($endTime)) {
             $_SESSION["error"][] = "End time can't be smaller than start time";
             header("Location: plannen");
         } else {
             // start is eerder dan eindtijd
 
-            if (strtotime($starttime) < strtotime("09:00:00") || strtotime($endtime) > strtotime("15:00:00")) {
+            if (strtotime($startTime) < strtotime("09:00:00") || strtotime($endTime) > strtotime("15:00:00")) {
                 $_SESSION["error"][] = "Time must be between 9am and 3pm";
                 header("Location: update");
             } else {
 
-                foreach (getTimesupdate($idrider["RiderID"], $entryid, "rider") as $timesrider) {
-                    if (compareTime($starttime, $timesrider["start_time"], $timesrider["end_time"], $endtime, "start") ==
-                        false && compareTime($starttime, $timesrider["start_time"], $timesrider["end_time"], $endtime, "end") == false) {
+                foreach (getTimesupdate($idRider["RiderID"], $entryID, "rider") as $timesRider) {
+                    if (compareTime($startTime, $timesRider["start_time"], $timesRider["end_time"], $endTime, "start") ==
+                        false && compareTime($startTime, $timesRider["start_time"], $timesRider["end_time"], $endTime, "end") == false) {
                         array_push($checker, true);
                     } else {
                         $_SESSION["error"][] = "Rider is unavailable during your selected times";
                         array_push($checker, false);
                     }
                 }
-                foreach (getTimesupdate($idhorse["HorseID"], $entryid, "horse") as $timeshorse) {
-                    if (compareTime($starttime, $timeshorse["start_time"], $timeshorse["end_time"], $endtime, "start") ==
-                        false && compareTime($starttime, $timeshorse["start_time"], $timeshorse["end_time"], $endtime, "end") == false) {
+                foreach (getTimesupdate($idHorse["HorseID"], $entryID, "horse") as $timesHorse) {
+                    if (compareTime($startTime, $timesHorse["start_time"], $timesHorse["end_time"], $endTime, "start") ==
+                        false && compareTime($startTime, $timesHorse["start_time"], $timesHorse["end_time"], $endTime, "end") == false) {
                         array_push($checker, true);
                     } else {
                         $_SESSION["error"][] = "Horse is unavailable during your selected times";
@@ -140,9 +140,9 @@ function updatestore()
                     }
                 }
                 if (in_array(false, $checker)) {
-                    header("Location: edit/" . $entryid . "");
+                    header("Location: edit/" . $entryID . "");
                 } else {
-                    updateEntry($idrider["RiderID"], $idhorse["HorseID"], $starttime, $endtime, $entryid, $date);
+                    updateEntry($idRider["RiderID"], $idHorse["HorseID"], $startTime, $endTime, $entryID, $date);
                     $_SESSION["success"][] = "Successfully updated an entry";
                     header("Location: index");
                 }
