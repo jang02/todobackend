@@ -8,28 +8,28 @@
 </form>
 <div id="dateWrapper">
     <form action="<?= URL ?>horse/availability" method="post">
-        <input name="date" class="hidden" value="<?php $date = $data["horse"][0]["Date"];
+        <input name="date" class="hidden" value="<?php $date = $data["horse"][0]["date"];
         $date = strtotime($date);
         $date = strtotime("-1 day", $date);
         echo date('Y-m-d', $date); ?>">
         <?php
-        if (isset($data["horse"][0]["Date"])) {
+        if (isset($data["horse"][0]["date"])) {
             echo '<input type="submit" class="btn btn-primary" value="Vorige">';
         }
         ?>
     </form>
     <?php
-    if (isset($data["horse"][0]["Date"])) {
-        echo '<p>' . $data["horse"][0]["Date"] . '</p>';
+    if (isset($data["horse"][0]["date"])) {
+        echo '<p>' . $data["horse"][0]["date"] . '</p>';
     }
     ?>
     <form action="<?= URL ?>horse/availability" method="post">
-        <input name="date" class="hidden" value="<?php $date = $data["horse"][0]["Date"];
+        <input name="date" class="hidden" value="<?php $date = $data["horse"][0]["date"];
         $date = strtotime($date);
         $date = strtotime("+1 day", $date);
         echo date('Y-m-d', $date); ?>">
         <?php
-        if (isset($data["horse"][0]["Date"])) {
+        if (isset($data["horse"][0]["date"])) {
             echo '<input type="submit" class="btn btn-primary" value="Volgende">';
         }
         ?>
@@ -50,7 +50,7 @@
     <?php
     $i = 0;
     foreach ($data["horse"] as $horse) {
-        echo '<tr><td>' . $horse["type"] . '</td><td>' . $horse["HorseName"] . '</td><td>' . $data["boolean"][$i] . '</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
+        echo '<tr><td>' . $horse["type"] . '</td><td>' . $horse["horseName"] . '</td><td>' . $data["boolean"][$i] . '</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
         $i++;
     }
 

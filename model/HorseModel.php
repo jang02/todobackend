@@ -17,11 +17,11 @@ function getAllPlanned($date)
 {
     $db = openDatabaseConnection();
 
-    $sql = "SELECT id, TIME_FORMAT(start_time, '%H:%i') start_time, TIME_FORMAT(end_time, '%H:%i') end_time, HorseName, ras, Date 
+    $sql = "SELECT id, TIME_FORMAT(startTime, '%H:%i') startTime, TIME_FORMAT(endTime, '%H:%i') endTime, horseName, ras, date 
 FROM planning 
-  INNER JOIN horses on HorseID = Horse_id
+  INNER JOIN horses on horseID = horse_id
   WHERE Date=:date 
-ORDER BY start_time ASC";
+ORDER BY startTime ASC";
     $query = $db->prepare($sql);
     $query->bindParam(":date", $date);
     $query->execute();
@@ -36,10 +36,10 @@ function horsePlanned($id, $date)
     try {
         $db = openDatabaseConnection();
 
-        $sql = "SELECT TIME_FORMAT(start_time, '%H:%i') start_time, TIME_FORMAT(end_time, '%H:%i') end_time, Horse_id, Date 
+        $sql = "SELECT TIME_FORMAT(startTime, '%H:%i') startTime, TIME_FORMAT(endTime, '%H:%i') endTime, horse_id, Date 
 FROM planning 
 
-  WHERE Horse_id=:horseID AND Date=:date";
+  WHERE horse_id=:horseID AND Date=:date";
         $query = $db->prepare($sql);
         $query->bindParam(":horseID", $id);
         $query->bindParam(":date", $date);
@@ -58,7 +58,7 @@ function getHorse($id)
     try {
         $conn = openDatabaseConnection();
 
-        $stmt = $conn->prepare("SELECT * FROM `horses` WHERE HorseID = :id");
+        $stmt = $conn->prepare("SELECT * FROM `horses` WHERE horseID = :id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
 
